@@ -1,0 +1,3 @@
+[submodule "DISTRHO-Ports"]
+	path = DISTRHO-Ports
+	url = https://github.com/DISTRHO/DISTRHO-Ports.git

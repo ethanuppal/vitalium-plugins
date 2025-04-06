@@ -1,0 +1,26 @@
+[workspace]
+resolver = "3"
+members = ["dsp/delay"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+authors = ["Ethan Uppal <113849268+ethanuppal@users.noreply.github.com>"]
+license = "GPL-3.0"
+homepage = "https://github.com/ethanuppal/vitalium-plugins"
+description = "Bindings to Vitalium DSP plugins"
+
+[workspace.dependencies]
+nih_plug = { git = "https://github.com/robbert-vdh/nih-plug.git", features = [
+  "assert_process_allocs",
+] }
+nih_plug_vizia = { git = "https://github.com/robbert-vdh/nih-plug.git" }
+
+[profile.release]
+lto = "thin"
+strip = "symbols"
+
+[profile.profiling]
+inherits = "release"
+debug = true
+strip = "none"

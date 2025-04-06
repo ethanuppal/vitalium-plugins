@@ -1,0 +1,11 @@
+[package]
+name = "vitalium-delay-dsp"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+homepage.workspace = true
+description.workspace = true
+
+[lib]
+crate-type = ["cdylib"]
