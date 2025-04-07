@@ -16,6 +16,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
+      - name: Setup dependencies
+        run: |
+          sudo apt-get install meson
+          git submodule update --init --recursive
       - name: Install nightly rustfmt
         # https://stegosaurusdormant.com/rustfmt-nightly/
         run: rustup toolchain install nightly --allow-downgrade -c rustfmt
