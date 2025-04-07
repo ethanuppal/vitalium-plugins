@@ -18,17 +18,20 @@ use std::{
     process::Command,
 };
 
-use snafu::{whatever, ResultExt, Whatever};
+use snafu::{ResultExt, Whatever, whatever};
 
 /// Yes, I'm aware we are linking with the entire Vitalium library.
-pub fn build_and_link_with_vitalium(submodule_path: &Path) -> Result<(), Whatever> {
+pub fn build_and_link_with_vitalium(
+    submodule_path: &Path,
+) -> Result<(), Whatever> {
     println!(
         "cargo:rerun-if-changed={}",
         submodule_path.join("meson.build").display()
     );
 
-    let output_directory =
-        PathBuf::from(env::var("OUT_DIR").whatever_context("Could not read OUT_DIR")?);
+    let output_directory = PathBuf::from(
+        env::var("OUT_DIR").whatever_context("Could not read OUT_DIR")?,
+    );
     let meson_build_directory = output_directory.join("meson_build");
     println!("cargo:rerun-if-changed={}", meson_build_directory.display());
 
