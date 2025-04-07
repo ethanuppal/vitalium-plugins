@@ -14,12 +14,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Cache submodules
+        id: cache-submodule
+        uses: actions/cache@v3
+        with:
+          path: |
+            my/sub1
+            my/sub2
+          key: ${{ runner.os }}-submodules
+      - name: Update git submodules
+        if: steps.cache-submodule.outputs.cache-hit != 'true'
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
-      - name: Setup dependencies
-        run: |
-          sudo apt-get install meson
-          git submodule update --init --recursive
+
+      - uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: meson \
+            libasound2-dev libfreetype-dev libfftw3-dev mesa-common-dev libgl1-mesa-dev libx11-dev libxext-dev libxrender-dev libxcursor-dev \
+            pkg-config
+          version: 1.0
+
       - name: Install nightly rustfmt
         # https://stegosaurusdormant.com/rustfmt-nightly/
         run: rustup toolchain install nightly --allow-downgrade -c rustfmt
