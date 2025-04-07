@@ -1,15 +1,12 @@
 [package]
-name = "vitalium-delay-dsp"
+name = "build"
 version.workspace = true
 edition.workspace = true
 authors.workspace = true
 license.workspace = true
 homepage.workspace = true
 description.workspace = true
+publish = false
 
-[lib]
-crate-type = ["cdylib"]
-
-[build-dependencies]
+[dependencies]
 snafu.workspace = true
-build = { path = "../build/" }

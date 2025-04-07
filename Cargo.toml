@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["crates/delay-dsp"]
+members = ["crates/build", "crates/delay-dsp"]
 
 [workspace.package]
 version = "0.1.0"
@@ -15,6 +15,7 @@ nih_plug = { git = "https://github.com/robbert-vdh/nih-plug.git", features = [
   "assert_process_allocs",
 ] }
 nih_plug_vizia = { git = "https://github.com/robbert-vdh/nih-plug.git" }
+snafu = { version = "0.8.5", default-features = false, features = ["std"] }
 
 [profile.release]
 lto = "thin"
